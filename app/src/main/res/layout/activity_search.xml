@@ -59,60 +59,61 @@
 
     <ImageView
         android:id="@+id/search_Sanggye"
-        android:layout_width="230dp"
-        android:layout_height="243dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="260dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="213dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="30dp"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
-        app:layout_constraintVertical_bias="0.115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sanggye" />
 
     <ImageView
         android:id="@+id/search_Gongneung"
-        android:layout_width="157dp"
-        android:layout_height="147dp"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="27dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="127dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="173dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.613"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
-        app:layout_constraintVertical_bias="0.439"
+        app:layout_constraintTop_toTopOf="@+id/search_Sanggye"
         app:srcCompat="@drawable/gongneung" />
 
     <ImageView
-        android:id="@+id/search_Wolgye"
-        android:layout_width="139dp"
-        android:layout_height="126dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        android:id="@+id/search_Junggye"
+        android:layout_width="102dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="139dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
-        app:layout_constraintVertical_bias="0.469"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/junggye" />
+
+    <ImageView
+        android:id="@+id/search_Wolgye"
+        android:layout_width="119dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="122dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_Sanggye"
         app:srcCompat="@drawable/wolgye" />
 
     <ImageView
         android:id="@+id/search_Hagye"
-        android:layout_width="93dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="14dp"
+        android:layout_width="82dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="173dp"
+        android:layout_marginEnd="35dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
+        app:layout_constraintTop_toTopOf="@+id/search_Sanggye"
         app:srcCompat="@drawable/hagye" />
-
-    <ImageView
-        android:id="@+id/search_Junggye"
-        android:layout_width="159dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginEnd="122dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
-        app:srcCompat="@drawable/junggye" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
