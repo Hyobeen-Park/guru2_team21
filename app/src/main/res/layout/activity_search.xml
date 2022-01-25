@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+
+    <TextView
+        android:id="@+id/search_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="명소"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/search_restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="식당, 카페"
+        android:textColor="#777777"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/search_place"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/search_by_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_search_24" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_Gongneung">
+
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/search_Sanggye"
+        android:layout_width="230dp"
+        android:layout_height="243dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="260dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
+        app:layout_constraintVertical_bias="0.115"
+        app:srcCompat="@drawable/sanggye" />
+
+    <ImageView
+        android:id="@+id/search_Gongneung"
+        android:layout_width="157dp"
+        android:layout_height="147dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="27dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
+        app:layout_constraintVertical_bias="0.439"
+        app:srcCompat="@drawable/gongneung" />
+
+    <ImageView
+        android:id="@+id/search_Wolgye"
+        android:layout_width="139dp"
+        android:layout_height="126dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
+        app:layout_constraintVertical_bias="0.469"
+        app:srcCompat="@drawable/wolgye" />
+
+    <ImageView
+        android:id="@+id/search_Hagye"
+        android:layout_width="93dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="208dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
+        app:srcCompat="@drawable/hagye" />
+
+    <ImageView
+        android:id="@+id/search_Junggye"
+        android:layout_width="159dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="122dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_restaurant"
+        app:srcCompat="@drawable/junggye" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
