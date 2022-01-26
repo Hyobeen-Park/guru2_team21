@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyrouteCheckActivity">
+
+    <ImageView
+        android:id="@+id/s_icon"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/s_icon" />
+
+    <ImageView
+        android:id="@+id/s_arrow_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/s_arrow_icon" />
+
+    <ImageView
+        android:id="@+id/s_circle1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="116dp"
+        app:layout_constraintStart_toStartOf="@+id/s_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/s_circle" />
+
+    <ImageView
+        android:id="@+id/s_circle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/s_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/s_circle" />
+
+    <ImageView
+        android:id="@+id/s_circle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="191dp"
+        app:layout_constraintStart_toStartOf="@+id/s_icon"
+        app:layout_constraintTop_toBottomOf="@+id/s_circle1"
+        app:srcCompat="@drawable/s_circle" />
+
+    <ImageView
+        android:id="@+id/s_circle4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="193dp"
+        app:layout_constraintStart_toStartOf="@+id/s_icon"
+        app:layout_constraintTop_toBottomOf="@+id/s_circle3"
+        app:srcCompat="@drawable/s_circle" />
+
+    <ImageView
+        android:id="@+id/s_circle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="193dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/s_icon"
+        app:layout_constraintTop_toBottomOf="@+id/s_circle3"
+        app:srcCompat="@drawable/s_circle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

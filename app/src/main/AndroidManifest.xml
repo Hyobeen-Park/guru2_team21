@@ -9,15 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Guru2_team21">
-        <activity android:name=".RecordActivity"></activity>
+        <activity android:name=".MyrouteCheckActivity">
+        </activity>
+        <activity android:name=".MyrouteActivity" />
         <activity
             android:name=".InformationActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"> //액션바 보이지 않도록
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            //액션바 보이지 않도록
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
