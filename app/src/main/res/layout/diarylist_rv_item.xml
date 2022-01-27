@@ -50,6 +50,8 @@
                 android:layout_margin="8dp"
                 android:padding="8dp"
                 android:background="@drawable/record_edt_bg"
+                android:inputType="textMultiLine"
+                android:scrollHorizontally="false"
                 android:lines="5"
                 android:text="오늘은 어쩌구 저쩌구"
                 android:textSize="12dp">

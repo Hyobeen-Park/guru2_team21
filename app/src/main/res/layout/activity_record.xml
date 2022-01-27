@@ -13,8 +13,8 @@
         tools:context=".RecordActivty">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="413dp"
-            android:layout_height="590dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +36,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="361dp"
-                android:layout_height="92dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
                 android:background="@drawable/record_wirte_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
                 <EditText
                     android:id="@+id/diaryedt"
                     android:layout_width="272dp"
-                    android:layout_height="67dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
@@ -58,8 +58,10 @@
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/record_edt_bg"
                     android:ems="10"
+                    android:lines="3"
                     android:hint="오늘의 하루를 입력해보세요!"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
+                    android:scrollHorizontally="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/diaryimg"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +82,8 @@
                     app:layout_constraintStart_toEndOf="@+id/diaryedt"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.111"
-                    app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24" />
+                    app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24"
+                    tools:ignore="VectorDrawableCompat" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -110,7 +113,8 @@
                 android:textColor="#2196F3"
                 app:backgroundTint="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                android:layout_marginRight="24dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
