@@ -18,6 +18,7 @@ class MyrouteCheckActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myroute_check)
+        setTitle("나만의 최종 여행코스");
 
         s_icon = findViewById(R.id.s_icon)
         s_arrow_icon = findViewById(R.id.s_arrow_icon)

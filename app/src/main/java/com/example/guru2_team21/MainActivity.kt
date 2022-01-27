@@ -1,5 +1,6 @@
 package com.example.guru2_team21
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         my_route.setOnClickListener {
-
+            val intent = Intent(this, MyrouteActivity::class.java);
+            startActivity(intent);
         }
 
     }
