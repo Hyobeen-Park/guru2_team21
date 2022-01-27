@@ -15,12 +15,14 @@
         <activity android:name=".Myroutelist"></activity>
         <activity android:name=".MyrouteCheckActivity"></activity>
         <activity android:name=".MyrouteActivity" />
+        <activity android:name=".RecordActivity"></activity>
         <activity
             android:name=".InformationActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
