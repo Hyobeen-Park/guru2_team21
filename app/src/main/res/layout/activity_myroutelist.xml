@@ -12,11 +12,37 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+        <Button
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:id="@+id/check_list_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리스트1"/>
+
+        <Button
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:id="@+id/check_list_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리스트2"/>
+
+        <Button
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:id="@+id/check_list_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리스트3"/>
+
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
 
     </ScrollView>
 
