@@ -7,5 +7,6 @@ class Myroutelist : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myroutelist)
+        setTitle("나만의 코스 목록 확인");
     }
 }

@@ -31,11 +31,13 @@ class MainActivity : AppCompatActivity() {
         start_school = findViewById(R.id.start_school)
 
         search.setOnClickListener {
-
+            val intent = Intent(this, SearchActivity::class.java);
+            startActivity(intent);
         }
 
         record.setOnClickListener {
-
+            val intent = Intent(this, RecordActivity::class.java);
+            startActivity(intent);
         }
 
         rec_route.setOnClickListener {
