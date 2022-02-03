@@ -2,19 +2,23 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecordActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="#FFFFFF"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:context=".RecordActivty">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="605dp"
             android:background="@color/background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +28,7 @@
                 android:id="@+id/calenderView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="272dp"
+                android:layout_marginBottom="248dp"
                 android:weekSeparatorLineColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -38,13 +42,14 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/record_wirte_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/datetv">
+
 
                 <EditText
                     android:id="@+id/diaryedt"
@@ -58,9 +63,9 @@
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/record_edt_bg"
                     android:ems="10"
-                    android:lines="3"
                     android:hint="오늘의 하루를 입력해보세요!"
                     android:inputType="textMultiLine"
+                    android:lines="3"
                     android:scrollHorizontally="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/diaryimg"
@@ -82,7 +87,7 @@
                     app:layout_constraintStart_toEndOf="@+id/diaryedt"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.111"
-                    app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24"
+                    app:srcCompat="@drawable/ic_baseline_sentiment_satisfied_alt_24"
                     tools:ignore="VectorDrawableCompat" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,30 +109,38 @@
                 app:layout_constraintTop_toBottomOf="@+id/calenderView" />
 
             <Button
-                android:id="@+id/writebtn"
+                android:id="@+id/btnwrite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:clickable="false"
                 android:text="작성"
                 android:textColor="#2196F3"
                 app:backgroundTint="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                android:layout_marginRight="24dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/linearlayout_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnwrite">
 
-    </ScrollView>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
 
 </ScrollView>
