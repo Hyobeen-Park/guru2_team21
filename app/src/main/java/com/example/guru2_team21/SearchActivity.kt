@@ -1,14 +1,21 @@
 package com.example.guru2_team21
 
+import android.content.Context
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.w3c.dom.Text
 
 class SearchActivity : AppCompatActivity() {
-    var search_area = "nowon"   //검색 지역
-    var search_type = "place"   //장소 or 식당
+    var search_area = "nowon"   //검색 지역         nowon / sanggye / junggye / hagye / wolgye / gongneung
+    var search_type = "place"   //장소 or 식당      place / restaurant
 
     lateinit var search_place: TextView
     lateinit var search_restaurant: TextView
@@ -18,10 +25,15 @@ class SearchActivity : AppCompatActivity() {
     lateinit var search_wolgye: ImageView
     lateinit var search_gongneung: ImageView
     lateinit var search_by_name: ImageView
+    lateinit var search_layout: LinearLayout
+
+    lateinit var myHelper: myDBHelper
+    lateinit var sqlDB: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        setTitle("검색하기")
 
         search_place = findViewById(R.id.search_place)
         search_restaurant = findViewById(R.id.search_restaurant)
@@ -32,9 +44,13 @@ class SearchActivity : AppCompatActivity() {
         search_gongneung = findViewById(R.id.search_Gongneung)
         search_by_name = findViewById(R.id.search_by_name)
 
+        search_layout = findViewById(R.id.search_layout)
+
+        myHelper = myDBHelper(this)
+
         print_info(search_type, search_area)
 
-        //장소 or 식당
+        //장소 or 식당 구분하기
         search_place.setOnClickListener {
             search_place.setTextColor(Color.BLACK)
             search_restaurant.setTextColor(Color.GRAY)
@@ -116,14 +132,130 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
+
     }
 
+    //정보 search_layout 에 추가하기
     private fun print_info(search_type: String, search_area: String) {
-        //정보 search_layout 에 추가하기
+        sqlDB = myHelper.readableDatabase
+        var cursor: Cursor
+
+        var strImages = ""
+
+        search_layout.removeAllViews()
+
+        if (search_type.equals("place")) {      //장소 검색
+            when(search_area) {
+                "nowon" -> {    //노원구 전체 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+
+                    while (cursor.moveToNext()) {
+                        //아무것도 안들어있으면 Toast 검색결과 없다고 띄우기
+                        //val linearLayout = LinearLayout(this)
+                        val textView = TextView(this)
+                        //val imageView = ImageView(this)
+                        //linearLayout.orientation = LinearLayout.HORIZONTAL
+                        textView.text = cursor.getString(1)
+                        //linearLayout.addView(textView, 0)
+                        //linearLayout.addView(imageView, 1)
+                        search_layout.addView(textView, 0)
+                        //search_layout 에 textView 대신 linearLayout 추가하기?
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "sanggye" -> {    //상계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    while (cursor.moveToNext()) {
+                        //textView.text = cursor.getString(0)
+                        //search_layout.addView(textView, 0)
+                        //strNumbers += cursor.getString(1) + "\r\n"
+                    }
+
+                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "junggye" -> {    //중계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    while (cursor.moveToNext()) {
+                        //textView.text = cursor.getString(0)
+                        //search_layout.addView(textView, 0)
+                        //strNumbers += cursor.getString(1) + "\r\n"
+                    }
+
+                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "hagye" -> {    //하계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    while (cursor.moveToNext()) {
+                        //textView.text = cursor.getString(0)
+                        //search_layout.addView(textView, 0)
+                        //strNumbers += cursor.getString(1) + "\r\n"
+                    }
+
+                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "wolgye" -> {    //월계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    while (cursor.moveToNext()) {
+                        //textView.text = cursor.getString(0)
+                        //search_layout.addView(textView, 0)
+                        //strNumbers += cursor.getString(1) + "\r\n"
+                    }
+
+                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "gongneung" -> {    //공릉 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    while (cursor.moveToNext()) {
+                        //textView.text = cursor.getString(0)
+                        //search_layout.addView(textView, 0)
+                        //strNumbers += cursor.getString(1) + "\r\n"
+                    }
+
+                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+            }
+
+        } else {        //식당 검색
+            cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL;", null)
+            while (cursor.moveToNext()) {
+                //strNames += cursor.getString(0) + "\r\n"
+                //strNumbers += cursor.getString(1) + "\r\n"
+            }
+
+            //searchNameResult.setText(strNames)
+            //searchImageResult.setText(strNumbers)     이미지 첨부하기
+
+            cursor.close()
+            sqlDB.close()
+        }
+
+
 
     }
 
-    private fun manageImage() {
+    private fun manageImage() {     //검색 구역 구분 이미지 투명도 조절
         when {
             search_area.equals("nowon") -> {
                 search_sanggye.drawable.setAlpha(255)
@@ -175,7 +307,5 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
-
-
 
 }
