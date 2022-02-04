@@ -2,22 +2,30 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/list_item_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:src="@drawable/s_circle"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"/>
 
-        <LinearLayout
+    <TextView
+        android:id="@+id/list_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장소 이름"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="9"/>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/list_item_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="삭제"
+        android:layout_gravity="center_vertical"/>
 
 </LinearLayout>
