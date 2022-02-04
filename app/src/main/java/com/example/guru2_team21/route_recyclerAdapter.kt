@@ -27,7 +27,16 @@ RecyclerView.Adapter<route_recyclerAdapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.placeName.text = routelist.get(position).name
         holder.itemView.setOnClickListener {
-
+            itemClickListener.onClick(it, position)
         }
+    }
+
+    interface OnItemClickListener{
+        fun onClick(v:View, position: Int)
+    }
+    private lateinit var itemClickListener : OnItemClickListener
+
+    fun setItemClickListener(itemClickListener: OnItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 }
