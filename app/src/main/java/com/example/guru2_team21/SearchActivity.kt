@@ -6,16 +6,14 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
 class SearchActivity : AppCompatActivity() {
-    var search_area = "nowon"   //검색 지역         nowon / sanggye / junggye / hagye / wolgye / gongneung
-    var search_type = "place"   //장소 or 식당      place / restaurant
+    lateinit var search_area : String   //검색 지역         nowon / sanggye / junggye / hagye / wolgye / gongneung
+    lateinit var search_type : String   //장소 or 식당      place / restaurant
 
     lateinit var search_place: TextView
     lateinit var search_restaurant: TextView
@@ -29,6 +27,12 @@ class SearchActivity : AppCompatActivity() {
 
     lateinit var myHelper: myDBHelper
     lateinit var sqlDB: SQLiteDatabase
+
+    lateinit var search_recyclerView: RecyclerView
+
+    var searchName = " "
+    val placeList = ArrayList<placesData>()     //recyclerView list
+    // var textView: TextView =
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +49,13 @@ class SearchActivity : AppCompatActivity() {
         search_by_name = findViewById(R.id.search_by_name)
 
         search_layout = findViewById(R.id.search_layout)
+        search_recyclerView = findViewById(R.id.search_recyclerView)
 
         myHelper = myDBHelper(this)
 
+        search_type = "place"
+        search_area = "nowon"
+        manageImage()
         print_info(search_type, search_area)
 
         //장소 or 식당 구분하기
@@ -132,7 +140,6 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-
     }
 
     //정보 search_layout 에 추가하기
@@ -143,6 +150,7 @@ class SearchActivity : AppCompatActivity() {
         var strImages = ""
 
         search_layout.removeAllViews()
+        placeList.clear()
 
         if (search_type.equals("place")) {      //장소 검색
             when(search_area) {
@@ -150,16 +158,7 @@ class SearchActivity : AppCompatActivity() {
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
 
                     while (cursor.moveToNext()) {
-                        //아무것도 안들어있으면 Toast 검색결과 없다고 띄우기
-                        //val linearLayout = LinearLayout(this)
-                        val textView = TextView(this)
-                        //val imageView = ImageView(this)
-                        //linearLayout.orientation = LinearLayout.HORIZONTAL
-                        textView.text = cursor.getString(1)
-                        //linearLayout.addView(textView, 0)
-                        //linearLayout.addView(imageView, 1)
-                        search_layout.addView(textView, 0)
-                        //search_layout 에 textView 대신 linearLayout 추가하기?
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -167,70 +166,49 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 "sanggye" -> {    //상계 검색
-                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'sanggye';", null)
                     while (cursor.moveToNext()) {
-                        //textView.text = cursor.getString(0)
-                        //search_layout.addView(textView, 0)
-                        //strNumbers += cursor.getString(1) + "\r\n"
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
                     }
-
-                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
 
                     cursor.close()
                     sqlDB.close()
                 }
 
                 "junggye" -> {    //중계 검색
-                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'junggye';", null)
                     while (cursor.moveToNext()) {
-                        //textView.text = cursor.getString(0)
-                        //search_layout.addView(textView, 0)
-                        //strNumbers += cursor.getString(1) + "\r\n"
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
                     }
-
-                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
 
                     cursor.close()
                     sqlDB.close()
                 }
 
                 "hagye" -> {    //하계 검색
-                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'hagye';", null)
                     while (cursor.moveToNext()) {
-                        //textView.text = cursor.getString(0)
-                        //search_layout.addView(textView, 0)
-                        //strNumbers += cursor.getString(1) + "\r\n"
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
                     }
-
-                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
 
                     cursor.close()
                     sqlDB.close()
                 }
 
                 "wolgye" -> {    //월계 검색
-                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'wolgye';", null)
                     while (cursor.moveToNext()) {
-                        //textView.text = cursor.getString(0)
-                        //search_layout.addView(textView, 0)
-                        //strNumbers += cursor.getString(1) + "\r\n"
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
                     }
-
-                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
-
                     cursor.close()
                     sqlDB.close()
                 }
 
                 "gongneung" -> {    //공릉 검색
-                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'gongneung';", null)
                     while (cursor.moveToNext()) {
-                        //textView.text = cursor.getString(0)
-                        //search_layout.addView(textView, 0)
-                        //strNumbers += cursor.getString(1) + "\r\n"
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
                     }
-
-                    //searchImageResult.setText(strNumbers)     이미지 첨부하기
 
                     cursor.close()
                     sqlDB.close()
@@ -238,21 +216,71 @@ class SearchActivity : AppCompatActivity() {
             }
 
         } else {        //식당 검색
-            cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL;", null)
-            while (cursor.moveToNext()) {
-                //strNames += cursor.getString(0) + "\r\n"
-                //strNumbers += cursor.getString(1) + "\r\n"
+            when(search_area) {
+                "nowon" -> {    //노원구 전체 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL;", null)
+
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "sanggye" -> {    //상계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'sanggye';", null)
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "junggye" -> {    //중계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'junggye';", null)
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "hagye" -> {    //하계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'hagye';", null)
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "wolgye" -> {    //월계 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'wolgye';", null)
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                    }
+                    cursor.close()
+                    sqlDB.close()
+                }
+
+                "gongneung" -> {    //공릉 검색
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'gongneung';", null)
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
             }
-
-            //searchNameResult.setText(strNames)
-            //searchImageResult.setText(strNumbers)     이미지 첨부하기
-
-            cursor.close()
-            sqlDB.close()
         }
 
-
-
+        val adapter = search_recyclerAdapter(placeList)
+        search_recyclerView.adapter = adapter
     }
 
     private fun manageImage() {     //검색 구역 구분 이미지 투명도 조절
@@ -305,7 +333,5 @@ class SearchActivity : AppCompatActivity() {
                 search_gongneung.drawable.setAlpha(255)
             }
         }
-
     }
-
 }
