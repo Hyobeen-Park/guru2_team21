@@ -18,11 +18,14 @@ class MyrouteActivity : AppCompatActivity() {
     lateinit var sqlDB : SQLiteDatabase
     lateinit var route_layout : LinearLayout
     lateinit var route_recyclerview: RecyclerView
+    lateinit var myroute_recyclerview : RecyclerView
     lateinit var route_name : TextView
     lateinit var route_img : ImageView
     lateinit var route_address : TextView
+    lateinit var route_add : Button
 
     val routelist = ArrayList<routesData>()
+    val myroutelist = ArrayList<myroutesData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +33,16 @@ class MyrouteActivity : AppCompatActivity() {
         setTitle("나만의 코스 만들기");
 
         myHelper = myDBHelper(this)
+        myroutelist.clear()
 
         route_recyclerview = findViewById(R.id.route_recyclerview)
+        myroute_recyclerview = findViewById(R.id.myroute_recyclerview)
         choose_group = findViewById(R.id.choose_group)
         route_layout = findViewById(R.id.route_layout)
         route_name = findViewById(R.id.route_name)
         route_img = findViewById(R.id.route_img)
         route_address = findViewById(R.id.route_address)
+        route_add = findViewById(R.id.route_add)
 
         choose_group.setOnCheckedChangeListener { group, checkId ->
             routelist.clear()
@@ -47,6 +53,14 @@ class MyrouteActivity : AppCompatActivity() {
                 R.id.choose_wolgye -> show_list("wolgye")
                 R.id.choose_gongneung -> show_list("gongneung")
             }
+        }
+
+        route_add.setOnClickListener {
+            var myroute_str = route_name.getText().toString()
+            myroutelist.add(myroutesData(myroute_str))
+
+            val myadapter = myroute_recyclerAdapter(myroutelist)
+            myroute_recyclerview.adapter = myadapter
         }
     }
 
