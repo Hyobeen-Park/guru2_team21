@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/go_list1"
+        android:title="리스트1 보기">
+    </item>
+    <item
+        android:id="@+id/go_list2"
+        android:title="리스트2 보기">
+    </item>
+    <item
+        android:id="@+id/go_list3"
+        android:title="리스트3 보기">
+    </item>
+</menu>
