@@ -23,16 +23,12 @@ class SearchActivity : AppCompatActivity() {
     lateinit var search_wolgye: ImageView
     lateinit var search_gongneung: ImageView
     lateinit var search_by_name: ImageView
-    lateinit var search_layout: LinearLayout
+    lateinit var search_recyclerView: RecyclerView
 
     lateinit var myHelper: myDBHelper
     lateinit var sqlDB: SQLiteDatabase
 
-    lateinit var search_recyclerView: RecyclerView
-
-    var searchName = " "
     val placeList = ArrayList<placesData>()     //recyclerView list
-    // var textView: TextView =
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +44,6 @@ class SearchActivity : AppCompatActivity() {
         search_gongneung = findViewById(R.id.search_Gongneung)
         search_by_name = findViewById(R.id.search_by_name)
 
-        search_layout = findViewById(R.id.search_layout)
         search_recyclerView = findViewById(R.id.search_recyclerView)
 
         myHelper = myDBHelper(this)
@@ -75,8 +70,24 @@ class SearchActivity : AppCompatActivity() {
 
         //이름으로 검색
         search_by_name.setOnClickListener {
+            sqlDB = myHelper.readableDatabase
+            var cursor: Cursor
+
             val dlg = SearchDialog(this)
             dlg.start()
+            dlg.setOnClickListener(object : SearchDialog.OnDialogClickListener {
+                override fun onClicked(name: String) {
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gName LIKE $name;", null)
+
+
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
+                    }
+
+                    cursor.close()
+                    sqlDB.close()
+                }
+            })
         }
 
         //검색지역 변경
@@ -147,9 +158,6 @@ class SearchActivity : AppCompatActivity() {
         sqlDB = myHelper.readableDatabase
         var cursor: Cursor
 
-        var strImages = ""
-
-        search_layout.removeAllViews()
         placeList.clear()
 
         if (search_type.equals("place")) {      //장소 검색
@@ -158,7 +166,7 @@ class SearchActivity : AppCompatActivity() {
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL;", null)
 
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -168,7 +176,7 @@ class SearchActivity : AppCompatActivity() {
                 "sanggye" -> {    //상계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'sanggye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -178,7 +186,7 @@ class SearchActivity : AppCompatActivity() {
                 "junggye" -> {    //중계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'junggye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -188,7 +196,7 @@ class SearchActivity : AppCompatActivity() {
                 "hagye" -> {    //하계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'hagye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -198,7 +206,7 @@ class SearchActivity : AppCompatActivity() {
                 "wolgye" -> {    //월계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'wolgye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
                     cursor.close()
                     sqlDB.close()
@@ -207,7 +215,7 @@ class SearchActivity : AppCompatActivity() {
                 "gongneung" -> {    //공릉 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea LIKE 'gongneung';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -221,7 +229,7 @@ class SearchActivity : AppCompatActivity() {
                     cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL;", null)
 
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -231,7 +239,7 @@ class SearchActivity : AppCompatActivity() {
                 "sanggye" -> {    //상계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'sanggye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -241,7 +249,7 @@ class SearchActivity : AppCompatActivity() {
                 "junggye" -> {    //중계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'junggye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -251,7 +259,7 @@ class SearchActivity : AppCompatActivity() {
                 "hagye" -> {    //하계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'hagye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()
@@ -261,7 +269,7 @@ class SearchActivity : AppCompatActivity() {
                 "wolgye" -> {    //월계 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'wolgye';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
                     cursor.close()
                     sqlDB.close()
@@ -270,7 +278,7 @@ class SearchActivity : AppCompatActivity() {
                 "gongneung" -> {    //공릉 검색
                     cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea LIKE 'gongneung';", null)
                     while (cursor.moveToNext()) {
-                        placeList.add(placesData(cursor.getString(1), R.drawable.nowon))
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3), R.drawable.nowon))
                     }
 
                     cursor.close()

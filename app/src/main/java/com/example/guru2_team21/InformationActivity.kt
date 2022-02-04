@@ -20,7 +20,7 @@ class InformationActivity : AppCompatActivity() {
     lateinit var myHelper: myDBHelper
     lateinit var sqlDB: SQLiteDatabase
 
-    lateinit var name : String
+    lateinit var information : placesData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,28 +33,25 @@ class InformationActivity : AppCompatActivity() {
         info_menu = findViewById(R.id.info_menu)
 
         myHelper = myDBHelper(this)
-        name = intent.getStringExtra("name").toString()
-        setTitle(name)
+        information = intent.getSerializableExtra("data") as placesData
 
         print_info()
 
         info_menu.setOnClickListener {
             //dialog --> 코스에 추가하기
+            val dlg = Information_menu(this)
+            dlg.start()
+            dlg.setOnClickListener(object : Information_menu.OnDialogClickListener {
+                override fun onClicked(name: String) {
+                }
+            })
         }
     }
 
     private fun print_info() {
-        sqlDB = myHelper.readableDatabase
-        var cursor: Cursor
-
-        cursor = sqlDB.rawQuery("SELECT * FROM placesTBL", null)
-
-        place_name.setText(name)
+        place_name.setText(information.name)
         //place_image.setImageResource(R.drawable.(cursor.getString(4))) --> 수정
-        //place_address.setText(cursor.getString(2))
-        //place_information.setText(cursor.getString(3))
-
-        cursor.close()
-        sqlDB.close()
+        place_address.append(information.address)
+        place_information.append("\n" + information.information)
     }
 }

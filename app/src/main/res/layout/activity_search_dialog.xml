@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="검색"
+        android:privateImeOptions="defaultInputmode=korean"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

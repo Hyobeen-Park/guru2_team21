@@ -2,15 +2,17 @@ package com.example.guru2_team21
 
 import android.app.Dialog
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 
-class SearchDialog(context: Context) {
-    private val  dlg = Dialog(context)
+class Information_menu(context: Context) {
+    private val dlg = Dialog(context)
 
-    lateinit var search_button: Button
-    lateinit var searchTextField: EditText
+    lateinit var add_to_route: TextView
     private lateinit var onClickListener: OnDialogClickListener
 
     fun setOnClickListener(listener: OnDialogClickListener) {
@@ -19,22 +21,20 @@ class SearchDialog(context: Context) {
 
     fun start() {
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)   //타이틀바 제거
-        dlg.setContentView(R.layout.activity_search_dialog)
+        dlg.setContentView(R.layout.activity_information_menu)
         dlg.setCancelable(true)
 
-        search_button = dlg.findViewById(R.id.search_button)
-        searchTextField = dlg.findViewById(R.id.searchTextField)
+        add_to_route = dlg.findViewById(R.id.add_to_route)
 
-        search_button.setOnClickListener {
-            //searchTextField text 받아와서 검색하기
-            onClickListener.onClicked(searchTextField.text.toString())
+        add_to_route.setOnClickListener {
+            //나만의 루트에 추가하기
             dlg.dismiss()
         }
+
         dlg.show()
     }
 
     interface OnDialogClickListener {
         fun onClicked(name: String)
     }
-
 }
