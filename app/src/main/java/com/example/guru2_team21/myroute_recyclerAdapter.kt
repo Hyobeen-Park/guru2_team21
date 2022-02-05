@@ -1,15 +1,17 @@
 package com.example.guru2_team21
 
 import android.content.Intent
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
 
-class myroute_recyclerAdapter (val myroutelist : ArrayList<myroutesData>) :
-RecyclerView.Adapter<myroute_recyclerAdapter.ViewHolder>(){
+class myroute_recyclerAdapter (val myroutelist : ArrayList<myroutesData>) : Serializable,
+RecyclerView.Adapter<myroute_recyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myroute_recyclerAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_myroute_recycler, parent, false)
