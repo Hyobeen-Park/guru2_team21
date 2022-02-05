@@ -34,6 +34,7 @@ class RecordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
+        setTitle("기록하기")
 
         Log.d(TAG, "onCreate()")
 
