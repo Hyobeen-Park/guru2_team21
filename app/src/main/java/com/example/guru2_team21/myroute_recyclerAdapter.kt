@@ -8,24 +8,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class route_recyclerAdapter (val routelist : ArrayList<routesData>) :
-RecyclerView.Adapter<route_recyclerAdapter.ViewHolder>(){
+class myroute_recyclerAdapter (val myroutelist : ArrayList<myroutesData>) :
+RecyclerView.Adapter<myroute_recyclerAdapter.ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): route_recyclerAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_route_recycler, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myroute_recyclerAdapter.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_myroute_recycler, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return routelist.size
+        return myroutelist.size
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val placeName: TextView = itemView.findViewById(R.id.route_recyclertext)
+        val placeName: TextView = itemView.findViewById(R.id.myroute_recyclertext)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.placeName.text = routelist.get(position).name
+        holder.placeName.text = myroutelist.get(position).name
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
