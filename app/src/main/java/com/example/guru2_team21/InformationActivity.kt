@@ -35,6 +35,7 @@ class InformationActivity : AppCompatActivity() {
         myHelper = myDBHelper(this)
         information = intent.getSerializableExtra("data") as placesData
 
+        setTitle(information.name)
         print_info()
 
         info_menu.setOnClickListener {
@@ -50,7 +51,7 @@ class InformationActivity : AppCompatActivity() {
 
     private fun print_info() {
         place_name.setText(information.name)
-        //place_image.setImageResource(R.drawable.(cursor.getString(4))) --> 수정
+        place_image.setImageResource(resources.getIdentifier(information.img.toString(), "drawable", this.packageName))
         place_address.append(information.address)
         place_information.append("\n" + information.information)
     }

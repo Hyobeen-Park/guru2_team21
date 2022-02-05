@@ -31,7 +31,6 @@ RecyclerView.Adapter<search_recyclerAdapter.ViewHolder>() {
         holder.itemView.setOnClickListener {
             Intent(holder.itemView.context, InformationActivity::class.java).apply {
                 putExtra("data", placeList.get(position))
-                //addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run { holder.itemView.context.startActivity(this)}
         }
     }
