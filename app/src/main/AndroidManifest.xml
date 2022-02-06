@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Guru2_team21">
-        <activity android:name=".Myroutelist"></activity>
         <activity android:name=".MyrouteCheckActivity"></activity>
         <activity android:name=".MyrouteActivity" />
         <activity android:name=".RecordActivity"></activity>

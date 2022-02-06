@@ -29,9 +29,11 @@ class MyrouteActivity : AppCompatActivity() {
     lateinit var myroute_init : Button
     lateinit var myroute_finish : Button
 
+    //지역별 리스트와 나만의 코스 리스트 선언
     val routelist = ArrayList<routesData>()
     val myroutelist = ArrayList<myroutesData>()
 
+    //이미지 지정에 사용할 변수
     var myroute_img : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +56,7 @@ class MyrouteActivity : AppCompatActivity() {
         myroute_init = findViewById(R.id.myroute_init)
         myroute_finish = findViewById(R.id.myroute_finish)
 
+        //선택한 라디오 버튼에 해당하는 리스트 보여주도록 구현
         choose_group.setOnCheckedChangeListener { group, checkId ->
             routelist.clear()
             when (checkId) {
@@ -65,10 +68,13 @@ class MyrouteActivity : AppCompatActivity() {
             }
         }
 
+        //'리스트에 추가' 버튼을 클릭했을 경우
         route_add.setOnClickListener {
             myroutelist.add(myroutesData(route_name.getText().toString(), myroute_img))
 
             val myadapter = myroute_recyclerAdapter(myroutelist)
+
+            //아이템 클릭시 AlertDialog를 이용하여 리스트에서 삭제가 가능하도록 구현
             myadapter.setItemClickListener(object : myroute_recyclerAdapter.OnItemClickListener{
                 override fun onClick(v: View, position: Int){
                     val dlg: AlertDialog.Builder = AlertDialog.Builder(this@MyrouteActivity)
@@ -76,17 +82,21 @@ class MyrouteActivity : AppCompatActivity() {
                     dlg.setMessage("리스트에서 삭제하시겠습니까?")
                     dlg.setIcon(R.mipmap.ic_launcher)
                     dlg.setPositiveButton("아니요", null)
+
+                    //'예'를 클릭할 경우 Toast 메시지와 함께 리스트에서 삭제
                     dlg.setNegativeButton("예", DialogInterface.OnClickListener{dialog, which ->
                         Toast.makeText(this@MyrouteActivity, "리스트에서 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                         myroutelist.remove(myroutesData(myroutelist.get(position).name, myroutelist.get(position).img))
                         myroute_recyclerview.adapter = myadapter
                     })
+
                     dlg.show()
                 }
             })
             myroute_recyclerview.adapter = myadapter
         }
 
+        //'초기화' 버튼을 클릭했을 경우
         myroute_init.setOnClickListener {
             val myadapter = myroute_recyclerAdapter(myroutelist)
 
@@ -95,6 +105,8 @@ class MyrouteActivity : AppCompatActivity() {
             myroute_recyclerview.adapter = myadapter
         }
 
+        //'선택 완료' 버튼을 클릭했을 경우
+        //myroutelist전달과 함께 MyrouteCheckActivity로 액티비티 이동
         myroute_finish.setOnClickListener {
             val intent = Intent(this, MyrouteCheckActivity::class.java)
             intent.putExtra("myroutechecklist",myroutelist)
@@ -102,6 +114,7 @@ class MyrouteActivity : AppCompatActivity() {
         }
     }
 
+    //해당 지역의 리스트들을 보여주는 함수
     private fun show_list(type : String){
         sqlDB = myHelper.readableDatabase
         var cursor : Cursor
@@ -185,6 +198,7 @@ class MyrouteActivity : AppCompatActivity() {
 
         val adapter = route_recyclerAdapter(routelist)
 
+        //아이템 클릭시 route_infoview에 해당하는 장소의 이름, 주소, 이미지 출력
         adapter.setItemClickListener(object : route_recyclerAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 route_infoview.setVisibility(View.VISIBLE)
