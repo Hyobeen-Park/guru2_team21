@@ -11,15 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MyrouteCheckActivity : AppCompatActivity() {
 
-    lateinit var myHelper : myDBHelper
-    lateinit var sqlDB : SQLiteDatabase
-
     lateinit var myroute_check_recyclerview : RecyclerView
     lateinit var route_check_layout : LinearLayout
 
     var myroutechecklist = ArrayList<myroutesData>()
-    var myroutelist = ArrayList<myroutesData>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +23,6 @@ class MyrouteCheckActivity : AppCompatActivity() {
 
         val intent = getIntent()
         myroutechecklist = intent.getSerializableExtra("myroutechecklist") as ArrayList<myroutesData>
-
-
-        //myHelper = myDBHelper(this)
 
         route_check_layout = findViewById(R.id.myroute_check_layout)
         myroute_check_recyclerview = findViewById(R.id.myroute_check_recyclerview)

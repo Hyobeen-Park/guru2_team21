@@ -32,6 +32,8 @@ class MyrouteActivity : AppCompatActivity() {
     val routelist = ArrayList<routesData>()
     val myroutelist = ArrayList<myroutesData>()
 
+    var myroute_img : Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myroute)
@@ -53,7 +55,6 @@ class MyrouteActivity : AppCompatActivity() {
         myroute_finish = findViewById(R.id.myroute_finish)
 
         choose_group.setOnCheckedChangeListener { group, checkId ->
-            route_infoview.setVisibility(View.VISIBLE)
             routelist.clear()
             when (checkId) {
                 R.id.choose_sanggye -> show_list("sanggye")
@@ -65,8 +66,7 @@ class MyrouteActivity : AppCompatActivity() {
         }
 
         route_add.setOnClickListener {
-            var myroute_str = route_name.getText().toString()
-            myroutelist.add(myroutesData(myroute_str))
+            myroutelist.add(myroutesData(route_name.getText().toString(), myroute_img))
 
             val myadapter = myroute_recyclerAdapter(myroutelist)
             myadapter.setItemClickListener(object : myroute_recyclerAdapter.OnItemClickListener{
@@ -78,7 +78,7 @@ class MyrouteActivity : AppCompatActivity() {
                     dlg.setPositiveButton("아니요", null)
                     dlg.setNegativeButton("예", DialogInterface.OnClickListener{dialog, which ->
                         Toast.makeText(this@MyrouteActivity, "리스트에서 삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                        myroutelist.remove(myroutesData(myroutelist.get(position).name))
+                        //myroutelist.remove(myroutesData(myroutelist.get(position).name))
                         myroute_recyclerview.adapter = myadapter
                     })
                     dlg.show()
@@ -110,12 +110,12 @@ class MyrouteActivity : AppCompatActivity() {
             "sanggye" -> {
                 cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea Like 'sanggye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea Like 'sanggye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor.close()
@@ -125,12 +125,12 @@ class MyrouteActivity : AppCompatActivity() {
             "junggye" -> {
                 cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea Like 'junggye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea Like 'junggye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor.close()
@@ -140,12 +140,12 @@ class MyrouteActivity : AppCompatActivity() {
             "hagye" -> {
                 cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea Like 'hagye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea Like 'hagye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor.close()
@@ -155,12 +155,12 @@ class MyrouteActivity : AppCompatActivity() {
             "wolgye" -> {
                 cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea Like 'wolgye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea Like 'wolgye';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor.close()
@@ -170,12 +170,12 @@ class MyrouteActivity : AppCompatActivity() {
             "gongneung" -> {
                 cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gArea Like 'gongneung';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gArea Like 'gongneung';", null)
                 while (cursor.moveToNext()) {
-                    routelist.add(routesData(cursor.getString(1),cursor.getString(2)))
+                    routelist.add(routesData(cursor.getString(1),cursor.getString(2),resources.getIdentifier(cursor.getString(4), "drawable", this.packageName)))
                 }
 
                 cursor.close()
@@ -187,9 +187,12 @@ class MyrouteActivity : AppCompatActivity() {
 
         adapter.setItemClickListener(object : route_recyclerAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
+                route_infoview.setVisibility(View.VISIBLE)
                 route_name.setText(routelist.get(position).name)
                 route_address.setText(routelist.get(position).address)
+                route_img.setImageResource(resources.getIdentifier(routelist.get(position).img.toString(),"drawable",routelist.get(position).name))
 
+                myroute_img = routelist.get(position).img
             }
         })
         route_recyclerview.adapter = adapter
