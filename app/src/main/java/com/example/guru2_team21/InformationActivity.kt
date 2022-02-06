@@ -15,11 +15,8 @@ class InformationActivity : AppCompatActivity() {
     lateinit var place_image: ImageView
     lateinit var place_address: TextView
     lateinit var place_information: TextView
-    lateinit var info_menu: ImageView
 
     lateinit var myHelper: myDBHelper
-    lateinit var sqlDB: SQLiteDatabase
-
     lateinit var information : placesData
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,26 +27,15 @@ class InformationActivity : AppCompatActivity() {
         place_image = findViewById(R.id.place_image)
         place_address = findViewById(R.id.place_address)
         place_information = findViewById(R.id.place_information)
-        info_menu = findViewById(R.id.info_menu)
 
         myHelper = myDBHelper(this)
-        information = intent.getSerializableExtra("data") as placesData
+        information = intent.getSerializableExtra("data") as placesData     //intent에서 데이터 placesData로 받아오기
 
         setTitle(information.name)
         print_info()
-
-        info_menu.setOnClickListener {
-            //dialog --> 코스에 추가하기
-            val dlg = Information_menu(this)
-            dlg.start()
-            dlg.setOnClickListener(object : Information_menu.OnDialogClickListener {
-                override fun onClicked(name: String) {
-                }
-            })
-        }
     }
 
-    private fun print_info() {
+    private fun print_info() {      //정보 출력
         place_name.setText(information.name)
         place_image.setImageResource(resources.getIdentifier(information.img.toString(), "drawable", this.packageName))
         place_address.append(information.address)
