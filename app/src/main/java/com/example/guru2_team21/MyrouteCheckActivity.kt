@@ -17,7 +17,7 @@ class MyrouteCheckActivity : AppCompatActivity() {
     lateinit var myroute_check_recyclerview : RecyclerView
     lateinit var route_check_layout : LinearLayout
 
-    var myroutechecklist = ArrayList<myroutesCheckData>()
+    var myroutechecklist = ArrayList<myroutesData>()
     var myroutelist = ArrayList<myroutesData>()
 
 
@@ -27,11 +27,10 @@ class MyrouteCheckActivity : AppCompatActivity() {
         setTitle("나만의 최종 여행코스")
 
         val intent = getIntent()
-        //cast 안됨
-        myroutechecklist = intent.getSerializableExtra("myroutechecklist") as ArrayList<myroutesCheckData>
+        myroutechecklist = intent.getSerializableExtra("myroutechecklist") as ArrayList<myroutesData>
 
 
-        myHelper = myDBHelper(this)
+        //myHelper = myDBHelper(this)
 
         route_check_layout = findViewById(R.id.myroute_check_layout)
         myroute_check_recyclerview = findViewById(R.id.myroute_check_recyclerview)

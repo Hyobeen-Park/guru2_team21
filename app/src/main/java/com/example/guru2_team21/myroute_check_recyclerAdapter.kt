@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.io.Serializable
 
-class myroute_check_recyclerAdapter (val myroutechecklist : ArrayList<myroutesCheckData>) :
+class myroute_check_recyclerAdapter (val myroutechecklist : ArrayList<myroutesData>) :
         RecyclerView.Adapter<myroute_check_recyclerAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myroute_check_recyclerAdapter.ViewHolder {

@@ -189,7 +189,7 @@ class MyrouteActivity : AppCompatActivity() {
             override fun onClick(v: View, position: Int) {
                 route_name.setText(routelist.get(position).name)
                 route_address.setText(routelist.get(position).address)
-                //이미지 추가
+
             }
         })
         route_recyclerview.adapter = adapter

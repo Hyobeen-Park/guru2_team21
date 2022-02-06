@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     lateinit var search : Button
     lateinit var record : Button
-    lateinit var rec_route : Button
     lateinit var my_route : Button
     lateinit var maintext : TextView
     lateinit var subtext : TextView
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         search = findViewById(R.id.search)
         record = findViewById(R.id.record)
-        rec_route = findViewById(R.id.rec_route)
         my_route = findViewById(R.id.my_route)
         maintext = findViewById(R.id.Maintext)
         subtext = findViewById(R.id.Subtext)
@@ -40,14 +38,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        rec_route.setOnClickListener {
-
-        }
-
         my_route.setOnClickListener {
             val intent = Intent(this, MyrouteActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
