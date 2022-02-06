@@ -78,7 +78,7 @@ class MyrouteActivity : AppCompatActivity() {
                     dlg.setPositiveButton("아니요", null)
                     dlg.setNegativeButton("예", DialogInterface.OnClickListener{dialog, which ->
                         Toast.makeText(this@MyrouteActivity, "리스트에서 삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                        //myroutelist.remove(myroutesData(myroutelist.get(position).name))
+                        myroutelist.remove(myroutesData(myroutelist.get(position).name, myroutelist.get(position).img))
                         myroute_recyclerview.adapter = myadapter
                     })
                     dlg.show()
