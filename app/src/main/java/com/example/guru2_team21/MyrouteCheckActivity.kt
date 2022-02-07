@@ -21,6 +21,8 @@ class MyrouteCheckActivity : AppCompatActivity() {
         setContentView(R.layout.activity_myroute_check)
         setTitle("나만의 최종 여행코스")
 
+        //리스트를 전달받고 최종 여행코스 출력
+
         val intent = getIntent()
         myroutechecklist = intent.getSerializableExtra("myroutechecklist") as ArrayList<myroutesData>
 

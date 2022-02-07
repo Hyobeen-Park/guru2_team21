@@ -33,6 +33,7 @@ RecyclerView.Adapter<myroute_recyclerAdapter.ViewHolder>() {
         }
     }
 
+    //클릭 이벤트
     interface OnItemClickListener{
         fun onClick(v:View, position: Int)
     }

@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         place_logo = findViewById(R.id.place_logo)
         start_school = findViewById(R.id.start_school)
 
+        //검색, 기록, 나만의 코스 버튼 클릭시 해당 액티비티로 이동
         search.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
