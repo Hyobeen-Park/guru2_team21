@@ -78,6 +78,7 @@ class SearchActivity : AppCompatActivity() {
             dlg.start()
             dlg.setOnClickListener(object : SearchDialog.OnDialogClickListener {
                 override fun onClicked(name: String) {
+
                     cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gName LIKE '%'||'$name'||'%';", null)
                     placeList.clear()
 
@@ -85,8 +86,15 @@ class SearchActivity : AppCompatActivity() {
                         placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                                 resources.getIdentifier(cursor.getString(4), "drawable", packageName)))
                     }
-                    cursor.close()
-                    sqlDB.close()
+
+                    cursor = sqlDB.rawQuery("SELECT * FROM restaurantTBL WHERE gName LIKE '%'||'$name'||'%';", null)
+
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                                resources.getIdentifier(cursor.getString(4), "drawable", packageName)))
+                    }
+                        cursor.close()
+                        sqlDB.close()
 
                     if(placeList.size == 0) {
                         print_toast()
