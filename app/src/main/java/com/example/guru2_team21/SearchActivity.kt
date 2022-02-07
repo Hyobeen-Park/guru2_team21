@@ -85,13 +85,15 @@ class SearchActivity : AppCompatActivity() {
                         placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                                 resources.getIdentifier(cursor.getString(4), "drawable", packageName)))
                     }
-
                     cursor.close()
                     sqlDB.close()
 
                     if(placeList.size == 0) {
                         print_toast()
                     }
+
+                    val adapter = search_recyclerAdapter(placeList)
+                    search_recyclerView.adapter = adapter
                 }
             })
         }
