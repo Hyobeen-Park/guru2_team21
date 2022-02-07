@@ -73,33 +73,27 @@ class SearchActivity : AppCompatActivity() {
         search_by_name.setOnClickListener {
             sqlDB = myHelper.readableDatabase
             var cursor: Cursor
-            var is_searched = true    //검색 확인
 
             val dlg = SearchDialog(this)
             dlg.start()
             dlg.setOnClickListener(object : SearchDialog.OnDialogClickListener {
                 override fun onClicked(name: String) {
-                    try {
-                        cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gName LIKE '%'||name||'%';", null)
-                        placeList.clear()
+                    cursor = sqlDB.rawQuery("SELECT * FROM placesTBL WHERE gName LIKE '%'||'$name'||'%';", null)
+                    placeList.clear()
 
-                        while (cursor.moveToNext()) {
-                            placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                                    resources.getIdentifier(cursor.getString(4), "drawable", packageName)))
-                        }
+                    while (cursor.moveToNext()) {
+                        placeList.add(placesData(cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                                resources.getIdentifier(cursor.getString(4), "drawable", packageName)))
+                    }
 
-                        cursor.close()
-                        sqlDB.close()
-                    } catch (e: Exception) {    //검색결과가 없을 때
-                        is_searched = false
+                    cursor.close()
+                    sqlDB.close()
+
+                    if(placeList.size == 0) {
+                        print_toast()
                     }
                 }
             })
-
-            if(!is_searched) {
-                //검색결과가 없으면 Toast
-                Toast.makeText(this, "검색 결과가 없습니다.", Toast.LENGTH_LONG).show()
-            }
         }
 
         //검색지역 변경
@@ -365,5 +359,9 @@ class SearchActivity : AppCompatActivity() {
                 search_gongneung.drawable.setAlpha(255)
             }
         }
+    }
+
+    private fun print_toast() {
+        Toast.makeText(this, "검색 결과가 없습니다.", Toast.LENGTH_LONG).show()
     }
 }
